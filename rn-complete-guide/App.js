@@ -1,5 +1,5 @@
 import React , { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, Button, ScrollView , FlatList} from 'react-native';
+import { StyleSheet, View , FlatList} from 'react-native';
 import GoalItem from './components/GoalItem';
 import GoalInput from './components/GoalInput';
 
@@ -10,7 +10,7 @@ export default function App() {
     setCourseGoals(currentGoals => [...currentGoals,
       {uid:Math.random().toString(), val: goalTitle}]);
   };
-  
+
   return (
     <View style={styles.container}>
       <GoalInput onAddGoal={addGoalHandler} />
@@ -18,7 +18,7 @@ export default function App() {
         keyExtractor={(item,index)=> item.uid}
         data={courseGoals}
         renderItem={
-          itemData=>(<GoalItem title={itemData.item.val}/> 
+          itemData=>(<GoalItem title={itemData.item.val} onTouch={() => console.log("Hey you touched it")} /> 
          )}/>
     </View>
   );
