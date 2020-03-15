@@ -19,7 +19,7 @@ const GoalInput = porps => {
     setEnteredGoal("");
   };
   return (
-    <Modal visible={porps.visible} animationType={"fade"}>
+    <Modal visible={porps.visible} animationType={"slide"}>
       <View style={styles.container2}>
         <TextInput
           placeholder="enter new course goal ..   "
