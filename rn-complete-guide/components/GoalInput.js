@@ -1,40 +1,69 @@
-import React, {useState} from 'react';
-import {Text, View, TextInput, Button, StyleSheet} from 'react-native';
+import React, { useState } from "react";
+import {
+  Text,
+  View,
+  TextInput,
+  Button,
+  StyleSheet,
+  Modal,
+  ColorPropType
+} from "react-native";
 
-const GoalInput = porps =>{
-    const [enteredGoal, setEnteredGoal] = useState('');
-    const goalInputHandler = (enteredText) => {
-        setEnteredGoal(enteredText);
-      };
-    return(
-        <View style={styles.container2}>
-            <TextInput 
-            placeholder="course goal" 
-            style={styles.textInput} 
-            onChangeText={goalInputHandler} 
-            value={enteredGoal}
-            />
-            <Button 
-            title="Add" 
-            onPress={porps.onAddGoal.bind(this,enteredGoal)} 
-            />
+const GoalInput = porps => {
+  const [enteredGoal, setEnteredGoal] = useState("");
+  const goalInputHandler = enteredText => {
+    setEnteredGoal(enteredText);
+  };
+  const addGoalHandler = () => {
+    porps.onAddGoal(enteredGoal);
+    setEnteredGoal("");
+  };
+  return (
+    <Modal visible={porps.visible} animationType={"fade"}>
+      <View style={styles.container2}>
+        <TextInput
+          placeholder="enter new course goal ..   "
+          placeholderTextColor="#949188"
+          style={styles.textInput}
+          onChangeText={goalInputHandler}
+          value={enteredGoal}
+        />
+        <View style={styles.buttonsContainer}>
+          <View style={styles.button}>
+            <Button title="Add" onPress={addGoalHandler} />
+          </View>
+          <View style={styles.button}>
+            <Button title="Cancel" onPress={porps.onCancel} color="red" />
+          </View>
         </View>
-    )
+      </View>
+    </Modal>
+  );
 };
 
 const styles = StyleSheet.create({
-    container2: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    },
-    textInput:{
-    flex:1,
-    borderColor: 'black',
+  container2: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#f0dfa1"
+  },
+  textInput: {
+    width: "80%",
+    borderColor: "black",
     borderWidth: 1,
-    padding: 5,
-    justifyContent: 'space-evenly'
-    },
+    padding: 10,
+    margin: 10,
+    justifyContent: "space-evenly"
+  },
+  buttonsContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "60%"
+  },
+  button: {
+    width: "40%"
+  }
 });
 
 export default GoalInput;
