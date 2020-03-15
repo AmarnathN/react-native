@@ -5,11 +5,15 @@ const GoalItem = props => {
   return (
     <TouchableOpacity activeOpacity={0.8} style={styles.listitem}>
       <View style={styles.buttonsContainer}>
-        <View style={{ width: "90%", alignContent: "center" }}>
+        <View style={{ width: "95%", justifyContent: "center" }}>
           <Text>{props.title}</Text>
         </View>
         <View style={styles.button}>
-          <Button title="x" onPress={props.onTouch.bind(this, props.uid)} />
+          <Button
+            title="x"
+            onPress={props.onTouch.bind(this, props.uid)}
+            color="red"
+          />
         </View>
       </View>
     </TouchableOpacity>
@@ -19,20 +23,17 @@ const GoalItem = props => {
 const styles = StyleSheet.create({
   listitem: {
     borderColor: "black",
-    marginTop: 15,
-    borderWidth: 2,
+    marginTop: 10,
+    borderWidth: 1,
     backgroundColor: "#d4d3d2"
   },
   buttonsContainer: {
     flexDirection: "row",
-    alignContent: "center",
     justifyContent: "space-evenly",
-    padding: 1
+    padding: 5
   },
   button: {
-    width: "10%",
-    justifyContent: "center",
-    borderWidth: 0.5
+    justifyContent: "center"
   }
 });
 export default GoalItem;
