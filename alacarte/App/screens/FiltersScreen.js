@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from "react-native";
 const FiltersScreen = props => {
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+      <Text>FiltersScreen</Text>
     </View>
   );
 };
@@ -14,7 +14,8 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
+    marginVertical: 10
   }
 });
 

@@ -1,10 +1,17 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Button } from "react-native";
 
-const CategoriesScreen = () => {
+const CategoriesScreen = props => {
+  //   console.log(props);
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+      <Text>The CategoriesScreen</Text>
+      <Button
+        title="Go to Meals"
+        onPress={() => {
+          props.navigation.navigate({ routeName: "CategoryMeals" });
+        }}
+      />
     </View>
   );
 };
@@ -14,7 +21,8 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
+    marginVertical: 10
   }
 });
 
