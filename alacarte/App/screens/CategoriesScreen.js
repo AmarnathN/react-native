@@ -1,19 +1,45 @@
 import React from "react";
-import { StyleSheet, Text, View, Button } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Button,
+  FlatList,
+  TouchableOpacity,
+  Platform
+} from "react-native";
+import { CATEGORIES } from "../data/DummyData";
+import Color from "../constants/color";
 
 const CategoriesScreen = props => {
+  const renderGridItem = itemData => {
+    return (
+      <TouchableOpacity
+        onPress={() => {
+          props.navigation.navigate("CategoryMeals", {
+            categoryId: itemData.item.id
+          });
+        }}
+        style={styles.container}
+      >
+        <View style={styles.gridItems}>
+          <Text>{itemData.item.title}</Text>
+        </View>
+      </TouchableOpacity>
+    );
+  };
   //   console.log(props);
   return (
-    <View style={styles.container}>
-      <Text>The CategoriesScreen</Text>
-      <Button
-        title="Go to Meals"
-        onPress={() => {
-          props.navigation.navigate({ routeName: "CategoryMeals" });
-        }}
-      />
-    </View>
+    <FlatList data={CATEGORIES} renderItem={renderGridItem} numColumns={2} />
   );
+};
+
+CategoriesScreen.navigationOptions = {
+  headerTitle: "Alacarte Categories",
+  headerStyle: {
+    backgroundColor: Platform.OS == "android" ? Color.primary : "white"
+  },
+  headerTintColor: Platform.OS == "ios" ? Color.primary : "white"
 };
 
 const styles = StyleSheet.create({
@@ -22,7 +48,12 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
-    marginVertical: 10
+    margin: 10
+  },
+  gridItems: {
+    flex: 1,
+    margin: 15,
+    height: 160
   }
 });
 
