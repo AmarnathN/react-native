@@ -40,7 +40,6 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.26,
     shadowColor: "black",
-    elevation: 3,
     padding: 10
   },
   gridItems: {
@@ -48,8 +47,9 @@ const styles = StyleSheet.create({
     width: "100%",
     alignItems: "center",
     justifyContent: "center",
-
-    borderRadius: 20
+    borderRadius: 20,
+    overflow: "hidden",
+    elevation: 5
   },
   title: {
     fontFamily: "comic-sans"
