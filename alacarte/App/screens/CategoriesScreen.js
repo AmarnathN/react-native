@@ -27,7 +27,7 @@ const CategoriesScreen = props => {
 };
 
 CategoriesScreen.navigationOptions = {
-  headerTitle: "Alacarte Categories"
+  headerTitle: "Alacarte"
 };
 
 const styles = StyleSheet.create({

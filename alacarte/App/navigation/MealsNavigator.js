@@ -10,9 +10,7 @@ import Color from "../constants/color";
 const AppNavigator = createStackNavigator(
   {
     Categories: CategoriesScreen,
-    CategoryMeals: {
-      screen: CategoryMealsScreen
-    },
+    CategoryMeals: CategoryMealsScreen,
     MealDetail: MealDetailsScreen
   },
   {
