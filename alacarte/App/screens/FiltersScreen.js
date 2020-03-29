@@ -8,7 +8,7 @@ import MyText from "../components/MyText";
 const FiltersScreen = props => {
   return (
     <View style={styles.container}>
-      <MyText text="FiltersScreen" />
+      <MyText>Available Filters/ Restrictions</MyText>
     </View>
   );
 };
