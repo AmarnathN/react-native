@@ -1,5 +1,5 @@
 import React from "react";
-import { Platform } from "react-native";
+import { Platform, Text } from "react-native";
 import { createStackNavigator } from "react-navigation-stack";
 import { createBottomTabNavigator } from "react-navigation-tabs";
 import { createAppContainer } from "react-navigation";
@@ -17,6 +17,12 @@ import FiltersScreen from "../screens/FiltersScreen";
 const defaulSatcktNavOptions = {
   headerStyle: {
     backgroundColor: Platform.OS == "android" ? Color.primary : Color.secondary
+  },
+  headerTitleStyle: {
+    fontFamily: "comic-sans-bold"
+  },
+  headerBackTitleStyle: {
+    fontFamily: "comic-sans"
   },
   headerTintColor: Platform.OS == "ios" ? "black" : "white"
 };
@@ -65,7 +71,14 @@ const tabScreenConfig = {
         return (
           <Ionicons name="ios-restaurant" size={20} color={tabInfo.tintColor} />
         );
-      }
+      },
+      tabBarColor: Color.primary,
+      tabBarLabel:
+        Platform.OS == "android" ? (
+          <Text style={{ fontFamily: "comic-sans" }}>Alacarte!!</Text>
+        ) : (
+          "Alacarte!"
+        )
     }
   },
   Favourites: {
@@ -73,7 +86,14 @@ const tabScreenConfig = {
     navigationOptions: {
       tabBarIcon: tabInfo => {
         return <Ionicons name="ios-star" size={20} color={tabInfo.tintColor} />;
-      }
+      },
+      tabBarColor: Color.secondary,
+      tabBarLabel:
+        Platform.OS == "android" ? (
+          <Text style={{ fontFamily: "comic-sans" }}>Favs!!</Text>
+        ) : (
+          "Favs!"
+        )
     }
   }
 };
@@ -83,11 +103,17 @@ const AppTabNavigator =
     ? createBottomTabNavigator(tabScreenConfig, {
         tabBarOptions: {
           activeTintColor: "black",
+          labelStyle: {
+            fontFamily: "comic-sans"
+          },
           activeBackgroundColor: Color.secondary
         }
       })
     : createMaterialBottomTabNavigator(tabScreenConfig, {
         activeColor: "black",
+        labelStyle: {
+          fontFamily: "comic-sans"
+        },
         barStyle: { backgroundColor: Color.primary },
         shifting: true
       });
