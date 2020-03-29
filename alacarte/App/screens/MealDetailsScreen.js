@@ -4,13 +4,14 @@ import { HeaderButtons, Item } from "react-navigation-header-buttons";
 
 import { MEALS } from "../data/DummyData";
 import MyHeaderButton from "../components/MyHeaderButton";
+import MyText from "../components/MyText";
 
 const MealDetailsScreen = props => {
   const mealId = props.navigation.getParam("mealId");
   const selectedMeal = MEALS.find(meal => mealId == meal.id);
   return (
     <View style={styles.container}>
-      <Text>{selectedMeal.title}</Text>
+      <MyText>{selectedMeal.title}</MyText>
     </View>
   );
 };
