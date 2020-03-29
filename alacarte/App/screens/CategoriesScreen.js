@@ -1,6 +1,10 @@
 import React from "react";
 import { StyleSheet, FlatList } from "react-native";
 import { CATEGORIES } from "../data/DummyData";
+import { HeaderButtons, Item } from "react-navigation-header-buttons";
+import { DrawerActions } from "react-navigation-drawer";
+
+import MyHeaderButton from "../components/MyHeaderButton";
 import CategoryGridTile from "../components/CategoryGridTile";
 
 const CategoriesScreen = props => {
@@ -26,8 +30,21 @@ const CategoriesScreen = props => {
   );
 };
 
-CategoriesScreen.navigationOptions = {
-  headerTitle: "Alacarte"
+CategoriesScreen.navigationOptions = navData => {
+  return {
+    headerTitle: "Alacarte",
+    headerLeft: () => (
+      <HeaderButtons HeaderButtonComponent={MyHeaderButton}>
+        <Item
+          title="Fav"
+          iconName="ios-menu"
+          onPress={() => {
+            navData.navigation.toggleDrawer();
+          }}
+        />
+      </HeaderButtons>
+    )
+  };
 };
 
 const styles = StyleSheet.create({

@@ -12,6 +12,7 @@ import CategoryMealsScreen from "../screens/CategoryMealsScreen";
 import MealDetailsScreen from "../screens/MealDetailsScreen";
 import FavouritesScreen from "../screens/FavouritesScreen";
 import Color from "../constants/color";
+import FiltersScreen from "../screens/FiltersScreen";
 
 const defaulSatcktNavOptions = {
   headerStyle: {
@@ -36,6 +37,19 @@ const FavNavigator = createStackNavigator(
   {
     Favourites: FavouritesScreen,
     MealDetail: MealDetailsScreen
+  },
+  {
+    mode: "card",
+    // navigationOptions: {
+    //   drawerLabel: "Favourites!!"
+    // },
+    defaultNavigationOptions: defaulSatcktNavOptions
+  }
+);
+
+const FilterNavigator = createStackNavigator(
+  {
+    Filters: FiltersScreen
   },
   {
     mode: "card",
@@ -78,4 +92,26 @@ const AppTabNavigator =
         shifting: true
       });
 
-export default createAppContainer(AppTabNavigator);
+const MainNavigator = createDrawerNavigator(
+  {
+    Alacarte: AppTabNavigator,
+    Favs: {
+      screen: FavNavigator,
+      navigationOptions: {
+        drawerLabel: "Favourites!!"
+      }
+    },
+    Filters: FilterNavigator
+  },
+  {
+    contentOptions: {
+      activeTintColor:
+        Platform.OS == "android" ? Color.primary : Color.secondary,
+      labelStyle: {
+        fontFamily: "comic-sans",
+        fontWeight: undefined
+      }
+    }
+  }
+);
+export default createAppContainer(MainNavigator);
