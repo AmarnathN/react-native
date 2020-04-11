@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, FlatList } from "react-native";
+import { StyleSheet, FlatList, Platform } from "react-native";
 import { CATEGORIES } from "../data/DummyData";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import { DrawerActions } from "react-navigation-drawer";
@@ -7,8 +7,8 @@ import { DrawerActions } from "react-navigation-drawer";
 import MyHeaderButton from "../components/MyHeaderButton";
 import CategoryGridTile from "../components/CategoryGridTile";
 
-const CategoriesScreen = props => {
-  const renderGridItem = itemData => {
+const CategoriesScreen = (props) => {
+  const renderGridItem = (itemData) => {
     return (
       <CategoryGridTile
         title={itemData.item.title}
@@ -17,8 +17,8 @@ const CategoriesScreen = props => {
           props.navigation.navigate({
             routeName: "CategoryMeals",
             params: {
-              categoryId: itemData.item.id
-            }
+              categoryId: itemData.item.id,
+            },
           });
         }}
       />
@@ -30,20 +30,20 @@ const CategoriesScreen = props => {
   );
 };
 
-CategoriesScreen.navigationOptions = navData => {
+CategoriesScreen.navigationOptions = (navData) => {
   return {
     headerTitle: "Alacarte",
     headerLeft: () => (
       <HeaderButtons HeaderButtonComponent={MyHeaderButton}>
         <Item
           title="Fav"
-          iconName="ios-menu"
+          iconName={Platform.OS == "android" ? "md-menu" : "ios-menu"}
           onPress={() => {
             navData.navigation.toggleDrawer();
           }}
         />
       </HeaderButtons>
-    )
+    ),
   };
 };
 
@@ -53,8 +53,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
-    margin: 10
-  }
+    margin: 10,
+  },
 });
 
 export default CategoriesScreen;

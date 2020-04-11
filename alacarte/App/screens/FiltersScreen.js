@@ -1,19 +1,62 @@
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import React, { useState } from "react";
+import { StyleSheet, Text, View, Switch, Platform } from "react-native";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 
 import MyHeaderButton from "../components/MyHeaderButton";
 import MyText from "../components/MyText";
+import Color from "../constants/color";
+import color from "../constants/color";
 
-const FiltersScreen = props => {
+const FilterSwitch = (props) => {
   return (
-    <View style={styles.container}>
-      <MyText>Available Filters/ Restrictions</MyText>
+    <View style={styles.filterContainer}>
+      <MyText>{props.label}</MyText>
+      <Switch
+        trackColor={{
+          true: Platform.OS == "android" ? color.primary : color.secondary,
+        }}
+        thumbColor="#ccc"
+        value={props.value}
+        onValueChange={props.onChange}
+      />
     </View>
   );
 };
 
-FiltersScreen.navigationOptions = navigationData => {
+const FiltersScreen = (props) => {
+  const [isGlutenFree, setIsGlutenFree] = useState(false);
+  const [isLactosefree, setIsLactoseFree] = useState(false);
+  const [isVegan, setIsVegan] = useState(false);
+  const [isVegetarian, setIsVegetarian] = useState(false);
+
+  return (
+    <View style={styles.container}>
+      <MyText style={styles.title}>Available Filters/ Restrictions</MyText>
+      <FilterSwitch
+        label="Gluten-free"
+        value={isGlutenFree}
+        onChange={(newValue) => setIsGlutenFree(newValue)}
+      />
+      <FilterSwitch
+        label="Lactose-free"
+        value={isLactosefree}
+        onChange={(newValue) => setIsLactoseFree(newValue)}
+      />
+      <FilterSwitch
+        label="Vegan"
+        value={isVegan}
+        onChange={(newValue) => setIsVegan(newValue)}
+      />
+      <FilterSwitch
+        label="Vegitarian"
+        value={isVegetarian}
+        onChange={(newValue) => setIsVegetarian(newValue)}
+      />
+    </View>
+  );
+};
+
+FiltersScreen.navigationOptions = (navigationData) => {
   return {
     headerLeft: () => (
       <HeaderButtons HeaderButtonComponent={MyHeaderButton}>
@@ -25,7 +68,18 @@ FiltersScreen.navigationOptions = navigationData => {
           }}
         />
       </HeaderButtons>
-    )
+    ),
+    headerRight: () => (
+      <HeaderButtons HeaderButtonComponent={MyHeaderButton}>
+        <Item
+          title="Fav"
+          iconName="ios-save"
+          onPress={() => {
+            console.log("Saving filters!!!!!");
+          }}
+        />
+      </HeaderButtons>
+    ),
   };
 };
 
@@ -34,9 +88,19 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
-    justifyContent: "center",
-    marginVertical: 10
-  }
+    marginVertical: 10,
+  },
+  title: {
+    fontSize: 18,
+    textAlign: "justify",
+  },
+  filterContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    width: "80%",
+    padding: 10,
+  },
 });
 
 export default FiltersScreen;

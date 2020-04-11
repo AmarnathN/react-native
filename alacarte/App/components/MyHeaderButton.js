@@ -5,13 +5,13 @@ import { Ionicons } from "@expo/vector-icons";
 
 import Color from "../constants/color";
 
-const MyHeaderButton = props => {
+const MyHeaderButton = (props) => {
   return (
     <HeaderButton
       {...props}
       IconComponent={Ionicons}
       iconSize={20}
-      color={Platform.OS == "ios" ? Color.primary : Color.secondary}
+      color={Platform.OS == "ios" ? "#000000" : "#000000"}
     />
   );
 };

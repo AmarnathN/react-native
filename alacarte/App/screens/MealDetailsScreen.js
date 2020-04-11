@@ -44,6 +44,10 @@ MealDetailsScreen.navigationOptions = navigationData => {
   const selectedMeal = MEALS.find(meal => mealId == meal.id);
   return {
     headerTitle: selectedMeal.title,
+    headerTitleContainerStyle: {
+      left: 35,
+      right: 35
+    },
     headerRight: () => (
       <HeaderButtons HeaderButtonComponent={MyHeaderButton}>
         <Item

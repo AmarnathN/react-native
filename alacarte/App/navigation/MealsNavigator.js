@@ -16,50 +16,52 @@ import FiltersScreen from "../screens/FiltersScreen";
 
 const defaulSatcktNavOptions = {
   headerStyle: {
-    backgroundColor: Platform.OS == "android" ? Color.primary : Color.secondary
+    backgroundColor: Platform.OS == "android" ? Color.primary : Color.secondary,
   },
   headerTitleStyle: {
-    fontFamily: "comic-sans-bold"
+    fontFamily: "comic-sans-bold",
+    padding: 10,
+    marginHorizontal: 10,
   },
   headerBackTitleStyle: {
-    fontFamily: "comic-sans"
+    fontFamily: "comic-sans",
   },
-  headerTintColor: Platform.OS == "ios" ? "black" : "white"
+  headerTintColor: Platform.OS == "ios" ? "black" : "white",
 };
 
 const AppNavigator = createStackNavigator(
   {
     Categories: CategoriesScreen,
     CategoryMeals: CategoryMealsScreen,
-    MealDetail: MealDetailsScreen
+    MealDetail: MealDetailsScreen,
   },
   {
     mode: "card",
-    defaultNavigationOptions: defaulSatcktNavOptions
+    defaultNavigationOptions: defaulSatcktNavOptions,
   }
 );
 
 const FavNavigator = createStackNavigator(
   {
     Favourites: FavouritesScreen,
-    MealDetail: MealDetailsScreen
+    MealDetail: MealDetailsScreen,
   },
   {
     mode: "card",
     // navigationOptions: {
     //   drawerLabel: "Favourites!!"
     // },
-    defaultNavigationOptions: defaulSatcktNavOptions
+    defaultNavigationOptions: defaulSatcktNavOptions,
   }
 );
 
 const FilterNavigator = createStackNavigator(
   {
-    Filters: FiltersScreen
+    Filters: FiltersScreen,
   },
   {
     mode: "card",
-    defaultNavigationOptions: defaulSatcktNavOptions
+    defaultNavigationOptions: defaulSatcktNavOptions,
   }
 );
 
@@ -67,7 +69,7 @@ const tabScreenConfig = {
   Alacarte: {
     screen: AppNavigator,
     navigationOptions: {
-      tabBarIcon: tabInfo => {
+      tabBarIcon: (tabInfo) => {
         return (
           <Ionicons name="ios-restaurant" size={20} color={tabInfo.tintColor} />
         );
@@ -78,13 +80,13 @@ const tabScreenConfig = {
           <Text style={{ fontFamily: "comic-sans" }}>Alacarte!!</Text>
         ) : (
           "Alacarte!"
-        )
-    }
+        ),
+    },
   },
   Favourites: {
     screen: FavNavigator,
     navigationOptions: {
-      tabBarIcon: tabInfo => {
+      tabBarIcon: (tabInfo) => {
         return <Ionicons name="ios-star" size={20} color={tabInfo.tintColor} />;
       },
       tabBarColor: Color.secondary,
@@ -93,9 +95,9 @@ const tabScreenConfig = {
           <Text style={{ fontFamily: "comic-sans" }}>Favs!!</Text>
         ) : (
           "Favs!"
-        )
-    }
-  }
+        ),
+    },
+  },
 };
 
 const AppTabNavigator =
@@ -104,18 +106,18 @@ const AppTabNavigator =
         tabBarOptions: {
           activeTintColor: "black",
           labelStyle: {
-            fontFamily: "comic-sans"
+            fontFamily: "comic-sans",
           },
-          activeBackgroundColor: Color.secondary
-        }
+          activeBackgroundColor: Color.secondary,
+        },
       })
     : createMaterialBottomTabNavigator(tabScreenConfig, {
         activeColor: "black",
         labelStyle: {
-          fontFamily: "comic-sans"
+          fontFamily: "comic-sans",
         },
         barStyle: { backgroundColor: Color.primary },
-        shifting: true
+        shifting: true,
       });
 
 const MainNavigator = createDrawerNavigator(
@@ -124,20 +126,21 @@ const MainNavigator = createDrawerNavigator(
     Favs: {
       screen: FavNavigator,
       navigationOptions: {
-        drawerLabel: "Favourites!!"
-      }
+        drawerLabel: "Favourites!!",
+      },
     },
-    Filters: FilterNavigator
+    Filters: FilterNavigator,
   },
   {
+    drawerPosition: "right",
+    drawerIcon: { focused: true, tintColor: "#000000" },
     contentOptions: {
-      activeTintColor:
-        Platform.OS == "android" ? Color.primary : Color.secondary,
+      activeTintColor: Platform.OS == "ios" ? Color.secondary : Color.primary,
       labelStyle: {
         fontFamily: "comic-sans",
-        fontWeight: undefined
-      }
-    }
+        fontWeight: undefined,
+      },
+    },
   }
 );
 export default createAppContainer(MainNavigator);
