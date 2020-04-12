@@ -19,7 +19,9 @@ const MealDetailsScreen = (props) => {
   const mealId = props.navigation.getParam("mealId");
   const availableMeals = useSelector((state) => state.meals.meals);
   const selectedMeal = availableMeals.find((meal) => mealId == meal.id);
-
+  const isCurrentMealfavourite = useSelector((state) =>
+    state.meals.favouriteMeals.some((meal) => meal.id === mealId)
+  );
   const dispatch = useDispatch();
   const toggleFavouriteHandler = useCallback(() => {
     dispatch(toggleFavourite(mealId));
@@ -29,6 +31,10 @@ const MealDetailsScreen = (props) => {
     // props.navigation.setParams({ mealTitle: selectedMeal.title }); added as param in previous copmponent
     props.navigation.setParams({ toggleFav: toggleFavouriteHandler });
   }, [toggleFavouriteHandler]);
+
+  useEffect(() => {
+    props.navigation.setParams({ isFav: isCurrentMealfavourite });
+  }, [isCurrentMealfavourite]);
   return (
     <ScrollView>
       <Image source={{ uri: selectedMeal.imageUrl }} style={styles.image} />
@@ -56,15 +62,20 @@ MealDetailsScreen.navigationOptions = (navigationData) => {
   // const selectedMeal = MEALS.find((meal) => mealId == meal.id);
   const toggleFavourite = navigationData.navigation.getParam("toggleFav");
   const mealTitle = navigationData.navigation.getParam("mealTitle");
+  const isFav = navigationData.navigation.getParam("isFav");
   return {
     headerTitle: mealTitle,
-    headerTitleContainerStyle: {
-      left: 35,
-      right: 35,
-    },
+    // headerTitleContainerStyle: {
+    //   left: "35%",
+    //   right: 35,
+    // },
     headerRight: () => (
       <HeaderButtons HeaderButtonComponent={MyHeaderButton}>
-        <Item title="Fav" iconName="ios-star" onPress={toggleFavourite} />
+        <Item
+          title="Fav"
+          iconName={isFav ? "ios-star" : "ios-star-outline"}
+          onPress={toggleFavourite}
+        />
       </HeaderButtons>
     ),
   };
@@ -78,7 +89,10 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     marginVertical: 10,
   },
-  image: { width: "100%", height: 200 },
+  image: {
+    width: "100%",
+    height: 200,
+  },
   title: {
     fontFamily: "comic-sans-bold",
     fontSize: 20,
