@@ -19,7 +19,11 @@ const ProductItem = (props) => {
   return (
     <View style={styles.product}>
       <View style={styles.touchable}>
-        <TouchableComponent onPress={props.onViewDetail}>
+        <TouchableComponent
+          onPress={() => {
+            props.onViewDetail();
+          }}
+        >
           <View>
             <View style={styles.imageContainer}>
               <Image style={styles.image} source={{ uri: props.image }} />
@@ -32,12 +36,16 @@ const ProductItem = (props) => {
               <Button
                 color={colors.primary}
                 title="View Details"
-                onPress={props.onViewDetail}
+                onPress={() => {
+                  props.onViewDetail();
+                }}
               />
               <Button
                 color={colors.primary}
                 title="To Cart"
-                onPress={props.onAddToCart}
+                onPress={() => {
+                  props.onAddToCart();
+                }}
               />
             </View>
           </View>
