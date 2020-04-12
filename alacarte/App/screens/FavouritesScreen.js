@@ -1,16 +1,16 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { useSelector } from "react-redux";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 
 import MealList from "../components/MealList";
 import MyHeaderButton from "../components/MyHeaderButton";
-import { MEALS } from "../data/DummyData";
 
-const FavouritesScreen = props => {
-  const fabMeals = MEALS.filter(meal => meal.id == "m1" || meal.id == "m2");
-  return <MealList listData={fabMeals} navigation={props.navigation} />;
+const FavouritesScreen = (props) => {
+  const favMeals = useSelector((state) => state.meals.favouriteMeals);
+
+  return <MealList listData={favMeals} navigation={props.navigation} />;
 };
-FavouritesScreen.navigationOptions = navigationData => {
+FavouritesScreen.navigationOptions = (navigationData) => {
   return {
     headerLeft: () => (
       <HeaderButtons HeaderButtonComponent={MyHeaderButton}>
@@ -22,7 +22,7 @@ FavouritesScreen.navigationOptions = navigationData => {
           }}
         />
       </HeaderButtons>
-    )
+    ),
   };
 };
 export default FavouritesScreen;

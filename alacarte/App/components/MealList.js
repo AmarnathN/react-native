@@ -3,8 +3,8 @@ import { View, StyleSheet, FlatList } from "react-native";
 
 import MealItem from "../components/MealItem";
 
-const MealList = props => {
-  const renderMealItem = itemData => {
+const MealList = (props) => {
+  const renderMealItem = (itemData) => {
     return (
       <MealItem
         title={itemData.item.title}
@@ -16,8 +16,9 @@ const MealList = props => {
           props.navigation.navigate({
             routeName: "MealDetail",
             params: {
-              mealId: itemData.item.id
-            }
+              mealId: itemData.item.id,
+              mealTitle: itemData.item.title,
+            },
           });
         }}
       />
@@ -41,11 +42,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
-    marginVertical: 10
+    marginVertical: 10,
   },
   listitem: {
     width: "100%",
-    padding: 10
-  }
+    padding: 10,
+  },
 });
 export default MealList;

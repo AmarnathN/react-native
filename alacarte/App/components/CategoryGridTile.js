@@ -5,10 +5,10 @@ import {
   StyleSheet,
   TouchableOpacity,
   TouchableNativeFeedback,
-  Platform
+  Platform,
 } from "react-native";
 
-const CategoryGridTile = props => {
+const CategoryGridTile = (props) => {
   let TouchableCmp = TouchableOpacity;
   if (Platform.OS == "android" && Platform.Version > 21) {
     TouchableCmp = TouchableNativeFeedback; // for ripple effect
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.26,
     shadowColor: "black",
-    padding: 10
+    padding: 10,
   },
   gridItems: {
     height: 150,
@@ -49,11 +49,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     borderRadius: 20,
     overflow: "hidden",
-    elevation: 5
+    elevation: 5,
   },
   title: {
-    fontFamily: "comic-sans"
-  }
+    fontFamily: "comic-sans",
+  },
 });
 
 export default CategoryGridTile;

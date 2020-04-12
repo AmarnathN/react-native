@@ -6,11 +6,11 @@ import {
   TouchableOpacity,
   TouchableNativeFeedback,
   Platform,
-  ImageBackground
+  ImageBackground,
 } from "react-native";
 import MyText from "./MyText";
 
-const MealItem = props => {
+const MealItem = (props) => {
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={props.onSelectMeal}>
@@ -37,26 +37,26 @@ const styles = StyleSheet.create({
     width: "100%",
     marginVertical: 10,
     borderRadius: 10,
-    overflow: "hidden"
+    overflow: "hidden",
   },
   mealRow: {
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   mealHeader: {
     height: "85%",
-    alignItems: "center"
+    alignItems: "center",
   },
   mealDetails: {
     flexDirection: "row",
     justifyContent: "space-between",
     padding: 5,
-    height: "15%"
+    height: "15%",
   },
   bgImg: {
     width: "100%",
     height: "100%",
-    justifyContent: "flex-end"
+    justifyContent: "flex-end",
   },
   title: {
     fontFamily: "comic-sans-bold",
@@ -66,8 +66,8 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(0,0,0,0.7)",
     paddingVertical: 5,
     paddingHorizontal: 5,
-    textAlign: "center"
-  }
+    textAlign: "center",
+  },
 });
 
 export default MealItem;
