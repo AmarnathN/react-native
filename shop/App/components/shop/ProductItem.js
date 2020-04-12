@@ -65,8 +65,6 @@ const styles = StyleSheet.create({
   details: {
     flexDirection: "column",
     alignItems: "center",
-    justifyContent: "space-between",
-    padding: 5,
     height: "25%",
     borderWidth: 0.5,
     borderColor: "#ccc",
@@ -84,10 +82,12 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 18,
+    fontFamily: "open-sans-bold",
     marginVertical: 4,
   },
   price: {
     fontSize: 14,
+    fontFamily: "open-sans",
     color: "#888",
   },
   actions: {
@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     height: "15%",
-    padding: 10,
+    padding: 5,
   },
 });
 
