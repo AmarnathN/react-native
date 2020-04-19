@@ -18,22 +18,28 @@ const CartItem = (props) => {
     TouchableComponent = TouchableNativeFeedback;
   }
   return (
-    <View style={styles.item}>
-      <Text style={styles.itemData}>
-        <Text style={styles.quantity}>{props.quantity} </Text>
-        <Text style={styles.title}>{props.title}</Text>
-      </Text>
-      <View style={styles.itemData}>
-        <Text style={styles.amount}>${props.amount}</Text>
-        <TouchableComponent onPress={props.onRemove} style={styles.actions}>
-          <Ionicons
-            name={Platform.OS == "android" ? "md-trash" : "ios-trash"}
-            size={23}
-            color={colors.remove}
-          />
-        </TouchableComponent>
+    <TouchableComponent
+      onPress={() => {
+        props.onViewDetails();
+      }}
+    >
+      <View style={styles.item}>
+        <Text style={styles.itemData}>
+          <Text style={styles.quantity}>{props.quantity} </Text>
+          <Text style={styles.title}>{props.title}</Text>
+        </Text>
+        <View style={styles.itemData}>
+          <Text style={styles.amount}>${props.amount.toFixed(2)}</Text>
+          <TouchableComponent onPress={props.onRemove} style={styles.actions}>
+            <Ionicons
+              name={Platform.OS == "android" ? "md-trash" : "ios-trash"}
+              size={23}
+              color={colors.remove}
+            />
+          </TouchableComponent>
+        </View>
       </View>
-    </View>
+    </TouchableComponent>
   );
 };
 

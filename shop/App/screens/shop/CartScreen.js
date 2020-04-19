@@ -8,9 +8,10 @@ import {
   StyleSheet,
   FlatList,
 } from "react-native";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import colors from "../../constants/colors";
 import CartItem from "../../components/shop/CartItem";
+import * as cartActions from "../../store/actions/cart";
 
 const CartScreen = (props) => {
   const cartTotal = useSelector((state) => state.cart.totalAmount);
@@ -27,6 +28,8 @@ const CartScreen = (props) => {
     }
     return itemsArray;
   });
+
+  const dispatch = useDispatch();
 
   return (
     <View style={styles.screen}>
@@ -45,7 +48,9 @@ const CartScreen = (props) => {
               title={itemData.item.productTitle}
               quantity={itemData.item.quantity}
               amount={itemData.item.sum}
-              onRemove={() => {}}
+              onRemove={() => {
+                dispatch(cartActions.reomveFromCart(itemData.item.productId));
+              }}
               onViewDetails={() => {
                 props.navigation.navigate("ProductDetails", {
                   productId: itemData.item.productId,
