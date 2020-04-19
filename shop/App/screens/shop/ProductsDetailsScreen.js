@@ -6,10 +6,13 @@ import {
   Image,
   Button,
   StyleSheet,
+  Platform,
 } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
-import colors from "../../constants/colors";
+import { HeaderButtons, Item } from "react-navigation-header-buttons";
 
+import colors from "../../constants/colors";
+import MyHeaderButton from "../../components/ui/MyHeaderButton";
 import * as cartActions from "../../store/actions/cart";
 
 const ProductDetailsScreen = (props) => {
@@ -45,6 +48,19 @@ const ProductDetailsScreen = (props) => {
 ProductDetailsScreen.navigationOptions = (navData) => {
   return {
     headerTitle: navData.navigation.getParam("productTitle"),
+    headerRight: () => {
+      return (
+        <HeaderButtons HeaderButtonComponent={MyHeaderButton}>
+          <Item
+            title="Cart"
+            iconName={Platform.OS === "android" ? "md-cart" : "ios-cart"}
+            onPress={() => {
+              navData.navigation.navigate("Cart");
+            }}
+          />
+        </HeaderButtons>
+      );
+    },
   };
 };
 
